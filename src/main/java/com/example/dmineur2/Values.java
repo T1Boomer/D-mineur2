@@ -13,7 +13,6 @@ public class Values {
     public static int NUMBER_OF_BOXES;
     public static int NUMBER_OF_FLAGS;
     public static boolean GAME_ENDING;
-    public static int BOMBS_AROUND = 0;
 
     public enum Difficulty {
         EASY,MEDIUM,HARD
@@ -31,17 +30,17 @@ public class Values {
               break;
 
            case MEDIUM:
-               SIZE_CASE = 17.5;
-               WIDTH_GRID = 350;
-               HEIGHT_GRID = 350;
+               SIZE_CASE = 20;
+               WIDTH_GRID = 400;
+               HEIGHT_GRID = 400;
                NUMBER_OF_BOMBS = 50;
                NUMBER_OF_FLAGS = 50;
                break;
 
            case HARD:
-               SIZE_CASE = 14;
-               WIDTH_GRID = 350;
-               HEIGHT_GRID = 350;
+               SIZE_CASE = 20;
+               WIDTH_GRID = 500;
+               HEIGHT_GRID = 500;
                NUMBER_OF_BOMBS = 100;
                NUMBER_OF_FLAGS = 100;
 

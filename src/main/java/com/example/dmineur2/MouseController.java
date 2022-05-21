@@ -15,17 +15,20 @@ public class MouseController implements EventHandler<MouseEvent> {
 
     @Override
     public void handle(MouseEvent mouseEvent) {
-        int mouseX = (int) Math.floor(mouseEvent.getX() / Values.SIZE_CASE);
-        int mouseY = (int) Math.floor(mouseEvent.getY() / Values.SIZE_CASE);
-        switch (mouseEvent.getButton()){
-            case PRIMARY:
-                System.out.println("mouseX : " + mouseX + "    mouseY : " + mouseY);
-                break;
+        if (!Values.GAME_ENDING) {
+            int mouseX = (int) Math.floor(mouseEvent.getX() / Values.SIZE_CASE);
+            int mouseY = (int) Math.floor(mouseEvent.getY() / Values.SIZE_CASE);
+            switch (mouseEvent.getButton()) {
+                case PRIMARY:
+                    System.out.println("mouseX : " + mouseX + "    mouseY : " + mouseY);
+                    view.revealNumber(mouseX, mouseY);
+                    break;
 
-            case SECONDARY:
-                model.setFlag(mouseX,mouseY);
-                view.update();
-                break;
+                case SECONDARY:
+                    model.setFlag(mouseX, mouseY);
+                    view.update();
+                    break;
+            }
         }
     }
 }
