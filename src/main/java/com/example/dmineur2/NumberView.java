@@ -13,13 +13,17 @@ public class NumberView extends Text {
         super(x * Values.SIZE_CASE + Values.SIZE_CASE / 4, (y + 1) * Values.SIZE_CASE - Values.SIZE_CASE / 4, String.valueOf(text));
         super.setText(String.valueOf((int) text));
         number = text;
-        update();
+//        update();
     }
 
 
-    public void update(){
+    public void update(char nombre){
+        super.setText(String.valueOf((int) nombre));
         super.setFont(Font.font("Arial", FontWeight.BOLD, FontPosture.REGULAR,Values.SIZE_CASE * 0.80));
-        switch ((int) number){
+        switch ((int) nombre){
+//            case 0:
+//                super.setFill(Color.WHITE);
+//                break;
             case 1:
                 super.setFill(Color.BLUE);
                 break;

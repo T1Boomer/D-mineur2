@@ -13,6 +13,8 @@ public class Values {
     public static int NUMBER_OF_BOXES;
     public static int NUMBER_OF_FLAGS;
     public static boolean GAME_ENDING;
+    public static boolean GAME_START;
+    public static int NUMBER_OF_BOXES_FOUND;
 
     public enum Difficulty {
         EASY,MEDIUM,HARD
@@ -43,7 +45,6 @@ public class Values {
                HEIGHT_GRID = 500;
                NUMBER_OF_BOMBS = 100;
                NUMBER_OF_FLAGS = 100;
-
                break;
        }
         NUMBER_OF_COLUMNS = (int) (WIDTH_GRID / SIZE_CASE);
@@ -51,6 +52,8 @@ public class Values {
         NUMBER_OF_BOXES = NUMBER_OF_COLUMNS * NUMBER_OF_ROWS;
         WIDTH_WINDOW = WIDTH_GRID + 100;
         HEIGHT_WINDOW = HEIGHT_GRID + 100;
+        NUMBER_OF_BOXES_FOUND = 0;
+        GAME_START = true;
         GAME_ENDING = false;
     }
 

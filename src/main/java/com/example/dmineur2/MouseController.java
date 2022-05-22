@@ -20,7 +20,12 @@ public class MouseController implements EventHandler<MouseEvent> {
             int mouseY = (int) Math.floor(mouseEvent.getY() / Values.SIZE_CASE);
             switch (mouseEvent.getButton()) {
                 case PRIMARY:
-                    System.out.println("mouseX : " + mouseX + "    mouseY : " + mouseY);
+                    if (Values.GAME_START){
+                        model.setBombs(mouseX,mouseY);
+                        model.setNumbers();
+                        view.update();
+                        Values.GAME_START = false;
+                    }
                     view.revealNumber(mouseX, mouseY);
                     break;
 

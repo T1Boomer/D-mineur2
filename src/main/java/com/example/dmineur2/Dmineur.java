@@ -7,29 +7,41 @@ public class Dmineur {
     private ArrayList<Position> bombs;
     private char [][] grid;
     private boolean [][] reveal;
+    private boolean [][] flag;
 
 
     public Dmineur() {
         this.bombs = new ArrayList<>();
         this.grid = new char[Values.NUMBER_OF_ROWS][Values.NUMBER_OF_COLUMNS];
         this.reveal = new boolean[Values.NUMBER_OF_ROWS][Values.NUMBER_OF_COLUMNS];
-//        setGrid();
-//        setBombs();
-//        setNumbers();
+        this.flag = new boolean[Values.NUMBER_OF_ROWS][Values.NUMBER_OF_COLUMNS];
     }
 
-    public void setBombs(){
+    public void setBombs(int mouseX, int mouseY){
         this.bombs = new ArrayList<>();
         int x = new Random().nextInt(Values.NUMBER_OF_COLUMNS);
         int y = new Random().nextInt(Values.NUMBER_OF_ROWS);
         for (int i = 0; i < Values.NUMBER_OF_BOMBS; i++) {
-            while (grid[y][x] != '.'){
+            while (grid[y][x] == 'X' || isZeroMouse(mouseX, mouseY, x, y)){
                 x = new Random().nextInt(Values.NUMBER_OF_COLUMNS);
                 y = new Random().nextInt(Values.NUMBER_OF_ROWS);
             }
             bombs.add(new Position(x, y));
             grid[y][x] = 'X';
         }
+    }
+
+    private boolean isZeroMouse(int mouseX, int mouseY, int x, int y) {
+        boolean b = false;
+        for (int i = -1; i < 2; i++) {
+            for (int j = -1; j < 2; j++) {
+                if (x == mouseX + i && y == mouseY + j){
+                    b = true;
+                    break;
+                }
+            }
+        }
+        return b;
     }
 
     public void setNumbers(){
@@ -100,6 +112,26 @@ public class Dmineur {
         }
     }
 
+    public boolean isZero(int x, int y){
+        return x >= 0 && x < Values.NUMBER_OF_COLUMNS && y >= 0 && y < Values.NUMBER_OF_ROWS && (int) grid[y][x] == 0;
+    }
+
+    public boolean isReveal(int x,int y){
+        if (x >= 0 && x < Values.NUMBER_OF_COLUMNS && y >= 0 && y < Values.NUMBER_OF_ROWS) {
+            return reveal[y][x];
+        }
+        return false;
+    }
+
+
+
+    public boolean isAny(int x,int y){
+        if (x >= 0 && x < Values.NUMBER_OF_COLUMNS && y >= 0 && y < Values.NUMBER_OF_ROWS) {
+                return !estUneBombe(x,y);
+        }
+        return false;
+    }
+
     public boolean[][] getReveal() {
         return reveal;
     }
@@ -120,23 +152,29 @@ public class Dmineur {
     public void setGrid(){
         this.grid = new char[Values.NUMBER_OF_ROWS][Values.NUMBER_OF_COLUMNS];
         this.reveal = new boolean[Values.NUMBER_OF_ROWS][Values.NUMBER_OF_COLUMNS];
+        this.flag = new boolean[Values.NUMBER_OF_ROWS][Values.NUMBER_OF_COLUMNS];
         for (int i = 0; i < Values.NUMBER_OF_ROWS; i++) {
             for (int j = 0; j < Values.NUMBER_OF_COLUMNS; j++) {
                 grid[i][j] = '.';
                 reveal[i][j] = false;
+                flag[i][j] = false;
             }
         }
     }
 
-    public void setFlag(int x,int y){
+    public boolean[][] getFlag() {
+        return flag;
+    }
+
+    public void setFlag(int x, int y){
         if (!Values.GAME_ENDING){
-            if (grid[y][x] >= 0 && !reveal[y][x]) {
+            if (!reveal[y][x] && !flag[y][x]) {
                 if (Values.NUMBER_OF_FLAGS != 0) {
-                    grid[y][x] = 'F';
+                    flag[y][x] = true;
                     Values.NUMBER_OF_FLAGS--;
                 }
-            } else if (grid[y][x] == 'F') {
-                grid[y][x] = '.';
+            } else if (flag[y][x]) {
+                flag[y][x] = false;
                 Values.NUMBER_OF_FLAGS++;
             }
         }
