@@ -27,8 +27,9 @@ public class GraphicView extends Pane {
         Rectangle rect;
         for (int i = 0; i < model.getGrid().length; i++) {
             for (int j = 0; j < model.getGrid()[i].length; j++) {
-                rect = new Rectangle(j * Values.SIZE_CASE + 1,i * Values.SIZE_CASE + 1 ,Values.SIZE_CASE - 2,Values.SIZE_CASE - 2);
+                rect = new Rectangle(j * Values.SIZE_CASE,i * Values.SIZE_CASE,Values.SIZE_CASE ,Values.SIZE_CASE);
                 super.getChildren().add(rect);
+                Values.pane.add(rect);
                 rectangles[i][j] = rect;
                 numberViews[i][j] = new NumberView(j,i,model.getGrid()[i][j]);
             }
@@ -53,6 +54,7 @@ public class GraphicView extends Pane {
 
                 if (model.getFlag()[i][j]){
                     rectangles[i][j].setFill(Color.RED);
+                    rectangles[i][j].setStroke(Color.RED);
                 }
 
                 numberViews[i][j].update(model.getGrid()[i][j]);
@@ -105,6 +107,7 @@ public class GraphicView extends Pane {
             }
             if (!model.getReveal()[y][x]) {
                 super.getChildren().add(numberViews[y][x]);
+                Values.pane.add(numberViews[y][x]);
                 Values.NUMBER_OF_BOXES_FOUND++;
                 if (Values.NUMBER_OF_COLUMNS * Values.NUMBER_OF_ROWS - Values.NUMBER_OF_BOXES_FOUND == Values.NUMBER_OF_BOMBS){
                     Values.GAME_ENDING = true;

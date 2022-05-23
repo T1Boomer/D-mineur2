@@ -1,5 +1,7 @@
 package com.example.dmineur2;
 
+import java.util.ArrayList;
+
 public class Values {
 
     public static double SIZE_CASE;
@@ -15,6 +17,7 @@ public class Values {
     public static boolean GAME_ENDING;
     public static boolean GAME_START;
     public static int NUMBER_OF_BOXES_FOUND;
+    public static ArrayList<Object> pane;
 
     public enum Difficulty {
         EASY,MEDIUM,HARD
@@ -32,9 +35,9 @@ public class Values {
               break;
 
            case MEDIUM:
-               SIZE_CASE = 20;
-               WIDTH_GRID = 400;
-               HEIGHT_GRID = 400;
+               SIZE_CASE = 22.5;
+               WIDTH_GRID = 450;
+               HEIGHT_GRID = 450;
                NUMBER_OF_BOMBS = 50;
                NUMBER_OF_FLAGS = 50;
                break;
@@ -47,6 +50,7 @@ public class Values {
                NUMBER_OF_FLAGS = 100;
                break;
        }
+       pane = new ArrayList<>();
         NUMBER_OF_COLUMNS = (int) (WIDTH_GRID / SIZE_CASE);
         NUMBER_OF_ROWS = (int) (HEIGHT_GRID / SIZE_CASE);
         NUMBER_OF_BOXES = NUMBER_OF_COLUMNS * NUMBER_OF_ROWS;

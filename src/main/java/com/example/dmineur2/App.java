@@ -1,13 +1,16 @@
 package com.example.dmineur2;
 
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.effect.DropShadow;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
@@ -59,12 +62,18 @@ public class App extends Application {
         easy.setOnAction(actionEvent -> {
             diff.setText(easy.getText());
             Values.setValues(Values.Difficulty.EASY);
+            while(Values.pane.size() > 0){
+                Values.pane.remove(Values.pane.size() - 1);
+            }
             initGrid(dmineur, graphicView, stage, hboxButtons);
         });
 
         medium.setOnAction(actionEvent -> {
             diff.setText(medium.getText());
             Values.setValues(Values.Difficulty.MEDIUM);
+            while(Values.pane.size() > 0){
+                Values.pane.remove(Values.pane.size() - 1);
+            }
             initGrid(dmineur, graphicView, stage, hboxButtons);
         });
 
@@ -78,6 +87,7 @@ public class App extends Application {
             flags.setText(" :  " + Values.NUMBER_OF_FLAGS);
             rect.setFill(Color.RED);
         });
+
         stage.show();
         stage.setResizable(false);
     }
